@@ -154,10 +154,7 @@ const loadAvatars = () => {
  * @returns 
  */
 const loadImages = (clas,array,number,folder) => {
-  
   let newArray = [...array]
-  
-  // console.log('esta es la longitud dela rray cuando de creo '+newArray.length)
   fragmentImages = document.createDocumentFragment()
   for (let i = 0; i < number; i++) {
     const position = Math.floor(Math.random() * newArray.length)
@@ -166,10 +163,8 @@ const loadImages = (clas,array,number,folder) => {
     newArray[position] +
     '.png'
     newArray.splice(position,1)
-    // console.log('esta es despues de hacerle un splice '+newArray.length)
     fragmentImages.appendChild(image)
   }
-  // console.log('esta es la longitud al fianlS '+newArray.length)
   return fragmentImages
 }
 /**
@@ -207,13 +202,16 @@ const putName = (name) => {
  *  for select and calling fucntion putName()
  */
 const loadName = () => {
-  putName(configname__button.previousElementSibling.value)
-  const option = createElement('OPTION','configname__option')
-  option.name = configname__button.previousElementSibling.value
-  option.value = configname__button.previousElementSibling.value
-  option.label = configname__button.previousElementSibling.value
-  select.prepend(option)
-  select.value = option.value
+  if(configname__button.previousElementSibling.value !== ''){
+    putName(configname__button.previousElementSibling.value)
+    const option = createElement('OPTION','configname__option')
+    option.name = configname__button.previousElementSibling.value
+    option.value = configname__button.previousElementSibling.value
+    option.label = configname__button.previousElementSibling.value
+    configname__button.previousElementSibling.value = ''
+    select.prepend(option)
+    select.value = option.value
+  }
 }
 /**
  * function to set choseen avatar image by user and set its src into dats__img.src 
@@ -399,7 +397,11 @@ const flipCard = (event) =>{
       postion = e
     }
     if(!checkCouple(lastPosition,postion)){
-      hideCard(lastPosition,postion)
+      setTimeout(() => {
+        hideCard(lastPosition,postion)
+      },500)
+      
+      
     }
     if(checkGame()){
       finishgame.classList.add('finishgame__show')

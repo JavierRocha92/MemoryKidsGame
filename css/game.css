@@ -26,12 +26,14 @@
 @keyframes showgame {
   from {
     opacity: 0;
-    top: -360px;
+    transform: rotate(180deg);
+    top: -400px;
     left: 1500px;
   }
 
   to {
-    top: -360px;
+    top: -600px;
+    transform: rotate(0deg);
     opacity: 1;
     left: 0px;
   }
